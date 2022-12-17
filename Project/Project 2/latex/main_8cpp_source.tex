@@ -1,0 +1,223 @@
+\hypertarget{main_8cpp_source}{}\doxysection{main.\+cpp}
+\label{main_8cpp_source}\index{Battleship.V10/main.cpp@{Battleship.V10/main.cpp}}
+\mbox{\hyperlink{main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00001}00001 \textcolor{comment}{/* }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00002}00002 \textcolor{comment}{ * File:   main.cpp}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00003}00003 \textcolor{comment}{ * Author: Daniel Baca}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00004}00004 \textcolor{comment}{ * Created on December 4th, 2022, 7:49 PM}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00005}00005 \textcolor{comment}{ * Purpose:  Version 10 (Final Version) -\/ Battleship}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00006}00006 \textcolor{comment}{ *   }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00007}00007 \textcolor{comment}{ * Create a functional game of BattleShip, implementing many of the programming }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00008}00008 \textcolor{comment}{ * concepts from Chapter 13 to 16, while following the rules of the original }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00009}00009 \textcolor{comment}{ * board game which are:}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00010}00010 \textcolor{comment}{ *      }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00011}00011 \textcolor{comment}{ * 1. Players place their 5 ships on their player board, the rules here are:}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00012}00012 \textcolor{comment}{ * }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00013}00013 \textcolor{comment}{ *  -\/ Place each ship in any horizontal or vertical position, but not }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00014}00014 \textcolor{comment}{ *    diagonally.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00015}00015 \textcolor{comment}{ *  -\/ Do not place a ship so that it overlaps the edge of the board or another}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00016}00016 \textcolor{comment}{ *    ship.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00017}00017 \textcolor{comment}{ *  -\/ Do not change the position of any ship once the game has begun.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00018}00018 \textcolor{comment}{ * }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00019}00019 \textcolor{comment}{ * 2. Decide who will go first, each player will alternate turns, calling out }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00020}00020 \textcolor{comment}{ *    one shot per turn to try and hit each other's ships.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00021}00021 \textcolor{comment}{ * }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00022}00022 \textcolor{comment}{ * 3. On your turn, pick a target hole on your enemy board and call out its }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00023}00023 \textcolor{comment}{ *    location by the letter and number. Each target hole has a letter-\/number }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00024}00024 \textcolor{comment}{ *    coordinate that corresponds with the same coordinate on your}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00025}00025 \textcolor{comment}{ *    enemy's board. To determine each coordinate, find its }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00026}00026 \textcolor{comment}{ *    corresponding letter on the left side of the target board and its number }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00027}00027 \textcolor{comment}{ *    on the top of the board. For example, when you call a shot, your opponent }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00028}00028 \textcolor{comment}{ *    must tell you whether your shot is a hit or a miss.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00029}00029 \textcolor{comment}{ *   }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00030}00030 \textcolor{comment}{ * 4. It's a Hit -\/ If you call out a shot location that is occupied by a ship on}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00031}00031 \textcolor{comment}{ *    your enemy's board, your shot is a hit! Your opponent tells you which ship}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00032}00032 \textcolor{comment}{ *    you have hit (cruiser, submarine, etc.). Your shots will be recorded for }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00033}00033 \textcolor{comment}{ *    you on each of the boards. Your opponent's board will be updated in the }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00034}00034 \textcolor{comment}{ *    corresponding hole of the ship you have hit on his or her board.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00035}00035 \textcolor{comment}{ *}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00036}00036 \textcolor{comment}{ * 5. It's a Miss -\/ If you call out a shot location not occupied by a ship on }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00037}00037 \textcolor{comment}{ *    your opponent's board, it's a miss. The board will record this move, so }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00038}00038 \textcolor{comment}{ *    you cannot call this shot again.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00039}00039 \textcolor{comment}{ *    }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00040}00040 \textcolor{comment}{ *    Play continues in this manner, with you and your opponent calling one shot}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00041}00041 \textcolor{comment}{ *    per turn.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00042}00042 \textcolor{comment}{ * }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00043}00043 \textcolor{comment}{ * 6. Once all the holes in any one ship are hit then the ship is considered}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00044}00044 \textcolor{comment}{ *    sunk. The owner of the ship must announce which ship was sunk.}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00045}00045 \textcolor{comment}{ * }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00046}00046 \textcolor{comment}{ * 7. If you're the first player to sink your opponents entire fleet of 5 ships,}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00047}00047 \textcolor{comment}{ *    you win the game!  }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00048}00048 \textcolor{comment}{ *  }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00049}00049 \textcolor{comment}{ */} }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00050}00050       }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00051}00051 \textcolor{comment}{//System Libraries}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00052}00052 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00053}00053 \textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00054}00054 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00055}00055 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00056}00056 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00057}00057 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00058}00058 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00059}00059 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00060}00060 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_board_8h}{Board.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00061}00061 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00062}00062     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00063}00063 \textcolor{comment}{//Function Prototype}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00064}00064 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8cpp_a54ef28ebedd4cc3d3834be3b55805e37}{game\_start}}(\mbox{\hyperlink{class_board}{Board}} []);      \textcolor{comment}{//Get both player's names and ship coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00066}00066 \textcolor{comment}{//Execution of Code Begins Here}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00067}\mbox{\hyperlink{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{00067}} \textcolor{keywordtype}{int} \mbox{\hyperlink{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv) }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00068}00068 \{ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00069}00069     \textcolor{comment}{//Declare all variables}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00070}00070     \textcolor{keywordtype}{bool} gme\_ovr;   \textcolor{comment}{//The bool variable gotten from the shooting functions }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00071}00071                     \textcolor{comment}{//telling whether or not the game has ended or not}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00072}00072     \textcolor{keywordtype}{char} choice;    \textcolor{comment}{//Char variable for the choice}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00073}00073     \mbox{\hyperlink{class_board}{Board}} play[2];  \textcolor{comment}{//Array of object variables used for the game}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00074}00074     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00075}00075     \textcolor{comment}{//Receive both player's starting information}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00076}00076     \mbox{\hyperlink{main_8cpp_a54ef28ebedd4cc3d3834be3b55805e37}{game\_start}}(play);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00077}00077     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00078}00078     \textcolor{comment}{//Check to see if each player has unique names and coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00079}00079     \textcolor{keywordflow}{if}(play[0] == play[1])}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00080}00080     \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00081}00081         cout << endl << \textcolor{stringliteral}{"{} You cannot have the same names and ship "{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00082}00082              << \textcolor{stringliteral}{"{}coordinates. Please Try Again."{}} << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00083}00083     \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00084}00084     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(play[0] != play[1])}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00085}00085     \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00086}00086         }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00087}00087     cout << endl << \textcolor{stringliteral}{"{}   Name and Coordinates look good to go..."{}} << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00088}00088      }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00089}00089     \textcolor{comment}{//Set the player coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00090}00090     play[0].\mbox{\hyperlink{class_board_a1fb513733bd51742aea3517c809bdd48}{coorsTonum1}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00091}00091     play[1].\mbox{\hyperlink{class_board_aac5cbbe8471013d81c75cba36b2d7b28}{coorsTonum2}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00092}00092     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00093}00093     \textcolor{comment}{//Set the players board up}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00094}00094     play[0].\mbox{\hyperlink{class_board_a33f4ca0e8df090f88dcca55d4ce35782}{numToboard1}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00095}00095     play[1].\mbox{\hyperlink{class_board_a7677004a8381abaab400321eeb3b8765}{numToboard2}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00096}00096     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00097}00097     \textcolor{comment}{//Loop for each player's turn, shooting their shots until someone wins}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00098}00098     \textcolor{keywordflow}{while}(!gme\_ovr)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00099}00099     \{   }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00100}00100         \textcolor{comment}{//Start Player 1's turn}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00101}00101         cout << endl << \textcolor{stringliteral}{"{}    "{}} << play[0].\mbox{\hyperlink{class_board_ad140ff2decdfeb0e80d5d266a890e730}{getplyrnm}}() << \textcolor{stringliteral}{"{} it's your turn!!!"{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00102}00102              << endl << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00103}00103         play[0].\mbox{\hyperlink{class_board_ac98c793381ea17b8ee7866cf7fcf285f}{disp\_board1}}();  }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00104}00104         gme\_ovr = play[0].\mbox{\hyperlink{class_board_a2fcd79552dfb59061e9f951e1e71563f}{shooting1}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00105}00105         }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00106}00106         \textcolor{comment}{//End game if necessary}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00107}00107         \textcolor{keywordflow}{if}(gme\_ovr)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00108}00108             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00109}00109            }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00110}00110         \textcolor{comment}{//Start Player 2's turn}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00111}00111         cout << endl << \textcolor{stringliteral}{"{}    "{}} << play[1].\mbox{\hyperlink{class_board_ad140ff2decdfeb0e80d5d266a890e730}{getplyrnm}}() << \textcolor{stringliteral}{"{} it's your turn!!!"{}} }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00112}00112              << endl << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00113}00113         play[1].\mbox{\hyperlink{class_board_a9df8d390febaf9139fe27c80b6a1e5cb}{disp\_board2}}();  }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00114}00114         gme\_ovr = play[1].\mbox{\hyperlink{class_board_abd8fb3f6595f92892ec1333a1ca50508}{shooting2}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00115}00115     \} }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00116}00116     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00117}00117     \textcolor{comment}{//Prompt players to input choice for Players Info}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00118}00118     cout << \textcolor{stringliteral}{"{}     Would you like to view the overall Players Recap? (Y/N) "{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00119}00119      cin >> choice;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00120}00120          }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00121}00121     \textcolor{comment}{//Use choice input to determine what to input for end of program}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00122}00122     \textcolor{keywordflow}{if}(choice == \textcolor{charliteral}{'Y'} || choice == \textcolor{charliteral}{'y'})}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00123}00123     \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00124}00124         play[0].\mbox{\hyperlink{class_board_a97b48d54223e67a4d1d9a9aa236e0c67}{results1}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00125}00125         play[1].\mbox{\hyperlink{class_board_a42435b1ee2d2ba2898d4e4e2bfaf6da6}{results2}}();}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00126}00126         cout << endl << \textcolor{stringliteral}{"{}    Thank you for Playing!!! "{}} << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00127}00127     \} }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00128}00128     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(choice == \textcolor{charliteral}{'N'} || choice == \textcolor{charliteral}{'n'})}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00129}00129         cout << endl << \textcolor{stringliteral}{"{}     Thank you for Playing!!! "{}} << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00130}00130     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00131}00131     \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00132}00132     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00133}00133     \textcolor{comment}{//Exit Stage Right}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00134}00134     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00135}00135 \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00136}00136  }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00137}00137 \textcolor{comment}{//Function for receiving all player information including name and ship }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00138}00138 \textcolor{comment}{//coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00139}\mbox{\hyperlink{main_8cpp_a54ef28ebedd4cc3d3834be3b55805e37}{00139}} \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8cpp_a54ef28ebedd4cc3d3834be3b55805e37}{game\_start}}(\mbox{\hyperlink{class_board}{Board}} play[])}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00140}00140 \{ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00141}00141     \textcolor{comment}{//Declare Variables}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00142}00142     \textcolor{keywordtype}{char} choice;         \textcolor{comment}{//Char variable holding player choice}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00143}00143     \textcolor{keywordtype}{int} numshps = 5;     \textcolor{comment}{//Number of ships per player}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00144}00144     \textcolor{keywordtype}{string} player\_name;  \textcolor{comment}{//String Array holding the name of the player}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00145}00145     \textcolor{keywordtype}{string} ships[5];        \textcolor{comment}{//String Array holding the ship coordinates input }}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00146}00146                             \textcolor{comment}{//by the player}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00147}00147     \textcolor{comment}{//String array holding the ship names}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00148}00148     \textcolor{keywordtype}{string} ship\_name[5] = \{\textcolor{stringliteral}{"{}Carrier"{}}, \textcolor{stringliteral}{"{}Battleship"{}}, \textcolor{stringliteral}{"{}Cruiser"{}}, }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00149}00149                            \textcolor{stringliteral}{"{}Submarine"{}}, \textcolor{stringliteral}{"{}Destroyer"{}}\};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00150}00150     \textcolor{keywordtype}{bool} tryagain = \textcolor{keyword}{true};   \textcolor{comment}{//Bool variable for exception loop}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00151}00151     }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00152}00152     \textcolor{comment}{//Ask player if they would like to see example input}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00153}00153     cout << endl << \textcolor{stringliteral}{"{} Would you like to see some example player input? (Y/N) "{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00154}00154      cin >> choice;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00155}00155     cout << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00156}00156      }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00157}00157     \textcolor{comment}{//Output player choice response}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00158}00158     play[0].\mbox{\hyperlink{class_board_ab2d0e3e0b6a67eb5f5f5368800b5b9bc}{setchoice}}(choice);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00159}00159         }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00160}00160     \textcolor{comment}{//Formatting}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00161}00161     cin.ignore(1); }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00162}00162       }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00163}00163     \textcolor{comment}{//Loop to get input for each player}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00164}00164     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<2;i++)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00165}00165     \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00166}00166         \textcolor{comment}{// Get Name of Player}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00167}00167         cout << endl << \textcolor{stringliteral}{"{}Name for Player \#"{}} << (i+1) << \textcolor{stringliteral}{"{}: "{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00168}00168         getline(cin, player\_name);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00169}00169         cout << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00170}00170          }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00171}00171         \textcolor{comment}{//Set player name to corresponding player object}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00172}00172         play[i].\mbox{\hyperlink{class_board_a084e3ccc9f41abc9a75d97d32d349da7}{setplyrnm}}(player\_name);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00173}00173  }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00174}00174         \textcolor{comment}{//Prompt user to input ship coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00175}00175         cout << \textcolor{stringliteral}{"{}            -\/-\/-\/ "{}} << play[i].\mbox{\hyperlink{class_board_ad140ff2decdfeb0e80d5d266a890e730}{getplyrnm}}()}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00176}00176              << \textcolor{stringliteral}{"{} choose you Ship Locations -\/-\/-\/"{}} << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00177}00177         cout << \textcolor{stringliteral}{"{}Select the coordinates for each ship "{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00178}00178              << \textcolor{stringliteral}{"{}(ex. input A1 A5, for the carrier)"{}} << endl << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00179}00179         }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00180}00180         \textcolor{comment}{//Loop for ship coordinates input}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00181}00181         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<numshps;j++)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00182}00182         \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00183}00183             \textcolor{comment}{//Input the ship coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00184}00184             cout << setw(20) << ship\_name[j] << \textcolor{stringliteral}{"{}: "{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00185}00185             getline(cin,ships[j]);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00186}00186         \} }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00187}00187          }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00188}00188         \textcolor{comment}{//Reset the bool variable for loop}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00189}00189         tryagain = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00190}00190          }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00191}00191         \textcolor{comment}{//Catch exceptions and mistakes in ship coordinate input}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00192}00192         \textcolor{keywordflow}{while}(tryagain)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00193}00193         \{ }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00194}00194             \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00195}00195             \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00196}00196                 \textcolor{comment}{//Set the ships coordinates into corresponding player object}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00197}00197                 play[i].\mbox{\hyperlink{class_player_a7cf40d518f5cb347e28b600d4f16016a}{setships}}(ships);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00198}00198                 tryagain = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00199}00199             \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00200}00200             \textcolor{keywordflow}{catch}(\mbox{\hyperlink{class_player_1_1_bad_ships}{Player::BadShips}})}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00201}00201             \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00202}00202                 \textcolor{comment}{//Prompt the user to enter valid input}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00203}00203                 cout << endl << \textcolor{stringliteral}{"{} Please follow the input format for the ship "{}}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00204}00204                     << \textcolor{stringliteral}{"{}coordinates. (ex. B3 B7)"{}} << endl << endl;}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00205}00205 }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00206}00206                 \textcolor{comment}{//Loop for ship coordinates input}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00207}00207                 \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<numshps;j++)}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00208}00208                 \{}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00209}00209                     \textcolor{comment}{//Input the ship coordinates}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00210}00210                     cout << setw(20) << ship\_name[j] << \textcolor{stringliteral}{"{}: "{}};}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00211}00211                     getline(cin,ships[j]);}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00212}00212                 \} }
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00213}00213             \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00214}00214         \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00215}00215     \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00216}00216 \}}
+\DoxyCodeLine{\Hypertarget{main_8cpp_source_l00217}00217  }
+
+\end{DoxyCode}

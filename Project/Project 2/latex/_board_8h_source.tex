@@ -1,0 +1,178 @@
+\hypertarget{_board_8h_source}{}\doxysection{Board.\+h}
+\label{_board_8h_source}\index{Battleship.V10/Board.h@{Battleship.V10/Board.h}}
+\mbox{\hyperlink{_board_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00001}00001 \textcolor{comment}{/* }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00002}00002 \textcolor{comment}{ * File:   Board.h}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00003}00003 \textcolor{comment}{ * Author: Daniel Baca}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00004}00004 \textcolor{comment}{ *}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00005}00005 \textcolor{comment}{ * Created on November 23, 2022, 8:39 PM}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00006}00006 \textcolor{comment}{ */}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00007}00007  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00008}00008 \textcolor{preprocessor}{\#ifndef BOARD\_H}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00009}00009 \textcolor{preprocessor}{\#define BOARD\_H}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00010}00010  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00011}00011 \textcolor{comment}{//System Libraries}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00012}00012 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_player_8h}{Player.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00013}00013 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_choice_8h}{Choice.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00014}00014 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00015}00015 \textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00016}00016 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00017}00017 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00018}00018 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00019}00019 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00020}00020 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00021}00021 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00022}00022 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00023}00023   }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00024}00024 \textcolor{comment}{//Board class holding board related info for each player as the game goes on}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00025}\mbox{\hyperlink{class_board}{00025}} \textcolor{keyword}{class }\mbox{\hyperlink{class_board}{Board}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_player}{Player}}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00026}00026 \{  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00027}00027 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00028}00028     \textcolor{keyword}{static} \textcolor{keywordtype}{int} ship\_coors1[20][20]; \textcolor{comment}{//Player 1's number Array with the number }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00029}00029                                     \textcolor{comment}{//coordinates converted from user input}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00030}00030     \textcolor{keyword}{static} \textcolor{keywordtype}{int} ship\_coors2[20][20]; \textcolor{comment}{//Player 2's number Array with the number }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00031}00031                                     \textcolor{comment}{//coordinates converted from user input}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00032}00032     \textcolor{keywordtype}{string} * shts\_frd = \textcolor{keyword}{new} \textcolor{keywordtype}{string}[100]; \textcolor{comment}{//Dynamic String Array holding the }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00033}00033                                          \textcolor{comment}{//shots fired by the player}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00034}00034     \mbox{\hyperlink{class_choice}{Choice<char>}} output;    \textcolor{comment}{//Aggregated class for initial output response}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00035}00035     \textcolor{keyword}{static} \textcolor{keywordtype}{char} player1\_board[10][10]; \textcolor{comment}{//C-\/string array holding Player 1's player }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00036}00036                                        \textcolor{comment}{//board moves}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00037}00037     \textcolor{keyword}{static} \textcolor{keywordtype}{char} enemy2\_board[10][10];  \textcolor{comment}{//C-\/string array holding Player 2's enemy}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00038}00038                                        \textcolor{comment}{//board moves}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00039}00039     \textcolor{keyword}{static} \textcolor{keywordtype}{char} player2\_board[10][10]; \textcolor{comment}{//C-\/string array holding Player 2's player}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00040}00040                                        \textcolor{comment}{//board moves}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00041}00041     \textcolor{keyword}{static} \textcolor{keywordtype}{char} enemy1\_board[10][10];  \textcolor{comment}{//C-\/string array holding Player 1's enemy}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00042}00042                                        \textcolor{comment}{//board moves}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00043}00043     \textcolor{keyword}{static} \textcolor{keywordtype}{int} count1; \textcolor{comment}{//Counter used to keep track of how many shots Player 1 }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00044}00044                        \textcolor{comment}{//has made}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00045}00045     \textcolor{keyword}{static} \textcolor{keywordtype}{int} count2; \textcolor{comment}{//Counter used to keep track of how many shots Player 2 }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00046}00046                        \textcolor{comment}{//has made}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00047}00047 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00048}00048     \textcolor{comment}{//Initial Constructor}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00049}\mbox{\hyperlink{class_board_a9ee491d4fea680cf69b033374a9fdfcb}{00049}}     \mbox{\hyperlink{class_board_a9ee491d4fea680cf69b033374a9fdfcb}{Board}}()}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00050}00050     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00051}00051         \textcolor{comment}{//Initialize the ship coordinates}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00052}00052         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<20;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00053}00053             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<20;j++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00054}00054                 ship\_coors1[i][j]=0;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00055}00055         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00056}00056         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<20;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00057}00057             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<20;j++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00058}00058                 ship\_coors2[i][j]=0;  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00059}00059   }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00060}00060         \textcolor{comment}{//Initialize the player boards}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00061}00061         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<10;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00062}00062             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<10;j++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00063}00063                 player1\_board[i][j]=\textcolor{charliteral}{'0'};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00064}00064         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00065}00065         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<10;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00066}00066             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<10;j++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00067}00067                 enemy1\_board[i][j]=\textcolor{charliteral}{'0'};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00068}00068         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00069}00069         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<10;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00070}00070             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<10;j++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00071}00071                 player2\_board[i][j]=\textcolor{charliteral}{'0'};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00072}00072         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00073}00073         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<10;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00074}00074             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<10;j++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00075}00075                 enemy2\_board[i][j]=\textcolor{charliteral}{'0'};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00076}00076     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00077}00077     }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00078}00078     \textcolor{comment}{//Overloaded == operator}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00079}\mbox{\hyperlink{class_board_a0f17631d5cc938b8ac8e915f0d29992d}{00079}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_board_a0f17631d5cc938b8ac8e915f0d29992d}{operator==}}(\mbox{\hyperlink{class_board}{Board}} \&same)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00080}00080     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00081}00081         \textcolor{keywordtype}{int} num = 0; \textcolor{comment}{//Temporary counter variable}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00082}00082         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00083}00083         \textcolor{comment}{//Determine if the player names are the same}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00084}00084         \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_player_a9784b63a14d88d2a5db11833c0ae6589}{player\_name}}==same.\mbox{\hyperlink{class_player_a9784b63a14d88d2a5db11833c0ae6589}{player\_name}})}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00085}00085         \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00086}00086             \textcolor{comment}{//Check to see if the ships coordinates are the same}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00087}00087             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<5;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00088}00088             \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00089}00089                 \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_player_aaa2caa59930c946dce39d60769fe5fa8}{ships}}[i]==same.\mbox{\hyperlink{class_player_aaa2caa59930c946dce39d60769fe5fa8}{ships}}[i])}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00090}00090                     num++;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00091}00091             \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00092}00092              }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00093}00093             \textcolor{comment}{//Return true if the two objects have the same values}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00094}00094             \textcolor{keywordflow}{if}(num == 5)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00095}00095             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00096}00096         \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00097}00097         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00098}00098         \textcolor{comment}{//Return false if the two objects don't have the same values}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00099}00099         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00100}00100     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00101}00101     }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00102}00102     \textcolor{comment}{//Overloaded != operator}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00103}\mbox{\hyperlink{class_board_af3b3083f12468b5a99ab103381794903}{00103}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_board_af3b3083f12468b5a99ab103381794903}{operator!=}}(\mbox{\hyperlink{class_board}{Board}} \&same)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00104}00104     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00105}00105         \textcolor{keywordtype}{int} num = 0; \textcolor{comment}{//Temporary counter variable}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00106}00106         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00107}00107         \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_player_a9784b63a14d88d2a5db11833c0ae6589}{player\_name}}!=same.\mbox{\hyperlink{class_player_a9784b63a14d88d2a5db11833c0ae6589}{player\_name}})}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00108}00108             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00109}00109         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00110}00110         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<5;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00111}00111         \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00112}00112             \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_player_aaa2caa59930c946dce39d60769fe5fa8}{ships}}[i]==same.\mbox{\hyperlink{class_player_aaa2caa59930c946dce39d60769fe5fa8}{ships}}[i])}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00113}00113                 num++;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00114}00114         \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00115}00115                }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00116}00116         \textcolor{comment}{//Return true if the two objects don't have the same values}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00117}00117         \textcolor{keywordflow}{if}(num < 5)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00118}00118         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00119}00119         }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00120}00120         \textcolor{comment}{//Return false if the two objects do have the same values}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00121}00121         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00122}00122     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00123}00123     }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00124}00124     \textcolor{comment}{//Destructor }}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00125}\mbox{\hyperlink{class_board_af73f45730119a1fd8f6670f53f959e68}{00125}}     \mbox{\hyperlink{class_board_af73f45730119a1fd8f6670f53f959e68}{\string~Board}}()}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00126}00126     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00127}00127         \textcolor{keyword}{delete}[] shts\_frd;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00128}00128     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00129}00129     }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00130}00130     \textcolor{comment}{//Copy Constructor}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00131}\mbox{\hyperlink{class_board_a186bacc10feaee390bcc7950371e1cc1}{00131}}     \mbox{\hyperlink{class_board_a186bacc10feaee390bcc7950371e1cc1}{Board}}(\mbox{\hyperlink{class_board}{Board}} \&obj)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00132}00132     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00133}00133         shts\_frd = \textcolor{keyword}{new} \textcolor{keywordtype}{string}[100];}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00134}00134           }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00135}00135         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<100;i++)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00136}00136             shts\_frd[i] = obj.shts\_frd[i];}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00137}00137     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00138}00138      }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00139}00139     \textcolor{comment}{//Function prototypes}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00140}00140     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a1fb513733bd51742aea3517c809bdd48}{coorsTonum1}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00141}00141     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_aac5cbbe8471013d81c75cba36b2d7b28}{coorsTonum2}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00142}00142     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a33f4ca0e8df090f88dcca55d4ce35782}{numToboard1}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00143}00143     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a7677004a8381abaab400321eeb3b8765}{numToboard2}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00144}00144     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_board_a2fcd79552dfb59061e9f951e1e71563f}{shooting1}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00145}00145     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_board_abd8fb3f6595f92892ec1333a1ca50508}{shooting2}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00146}00146     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_ac98c793381ea17b8ee7866cf7fcf285f}{disp\_board1}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00147}00147     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a9df8d390febaf9139fe27c80b6a1e5cb}{disp\_board2}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00148}00148     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a97b48d54223e67a4d1d9a9aa236e0c67}{results1}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00149}00149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a42435b1ee2d2ba2898d4e4e2bfaf6da6}{results2}}();}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00150}00150      }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00151}00151     \textcolor{comment}{//Set player name function}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00152}\mbox{\hyperlink{class_board_a084e3ccc9f41abc9a75d97d32d349da7}{00152}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_a084e3ccc9f41abc9a75d97d32d349da7}{setplyrnm}}(\textcolor{keywordtype}{string} pn)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00153}00153     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00154}00154         \mbox{\hyperlink{class_player_a9784b63a14d88d2a5db11833c0ae6589}{player\_name}} = pn;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00155}00155     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00156}00156     }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00157}00157     \textcolor{comment}{//Get player name function}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00158}\mbox{\hyperlink{class_board_ad140ff2decdfeb0e80d5d266a890e730}{00158}}     \textcolor{keywordtype}{string} \mbox{\hyperlink{class_board_ad140ff2decdfeb0e80d5d266a890e730}{getplyrnm}}()}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00159}00159     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00160}00160         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_player_a9784b63a14d88d2a5db11833c0ae6589}{player\_name}};}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00161}00161     \}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00162}00162     }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00163}00163     \textcolor{comment}{//Setchoice function to get player initial response}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00164}\mbox{\hyperlink{class_board_ab2d0e3e0b6a67eb5f5f5368800b5b9bc}{00164}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_board_ab2d0e3e0b6a67eb5f5f5368800b5b9bc}{setchoice}}(\textcolor{keywordtype}{char} c)}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00165}00165     \{}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00166}00166         cout << output;}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00167}00167         output.\mbox{\hyperlink{class_choice_a2b1e4e79547287f45002c8ccb073c66e}{respond}}(c);}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00168}00168     \}  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00169}00169 \};  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00170}00170  }
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00171}00171 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* BOARD\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_board_8h_source_l00172}00172 }
+
+\end{DoxyCode}

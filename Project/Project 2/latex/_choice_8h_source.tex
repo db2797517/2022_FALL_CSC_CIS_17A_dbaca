@@ -1,0 +1,108 @@
+\hypertarget{_choice_8h_source}{}\doxysection{Choice.\+h}
+\label{_choice_8h_source}\index{Battleship.V10/Choice.h@{Battleship.V10/Choice.h}}
+\mbox{\hyperlink{_choice_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00001}00001 \textcolor{comment}{/* }}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00002}00002 \textcolor{comment}{ * File:   Choice.h}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00003}00003 \textcolor{comment}{ * Author: Daniel Baca}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00004}00004 \textcolor{comment}{ *}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00005}00005 \textcolor{comment}{ * Created on November 28, 2022, 8:19 PM}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00006}00006 \textcolor{comment}{ */}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00007}00007  }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00008}00008 \textcolor{preprocessor}{\#ifndef CHOICE\_H}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00009}00009 \textcolor{preprocessor}{\#define CHOICE\_H}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00010}00010   }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00011}00011 \textcolor{comment}{//System Libraries}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00012}00012 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00013}00013 \textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00014}00014 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00015}00015 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00016}00016 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00017}00017 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00018}00018 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00019}00019 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00020}00020 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00021}00021  }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00022}00022 \textcolor{comment}{//Choice class, allowing players to ask for example input using a response}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00023}00023 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00024}\mbox{\hyperlink{class_choice}{00024}} \textcolor{keyword}{class }\mbox{\hyperlink{class_choice}{Choice}}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00025}00025 \{ }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00026}00026 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00027}00027     T response; \textcolor{comment}{//Variable used to make decision}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00028}00028 \textcolor{keyword}{public}:  }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00029}00029     \textcolor{comment}{//Initialize Constructor}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00030}\mbox{\hyperlink{class_choice_a1daf36e299e4938f3b9e087231284384}{00030}}     \mbox{\hyperlink{class_choice_a1daf36e299e4938f3b9e087231284384}{Choice}}()}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00031}00031     \{   response = \textcolor{charliteral}{' '};    \}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00032}00032     }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00033}00033     \textcolor{comment}{//Choice function used to output requested output}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00034}\mbox{\hyperlink{class_choice_a2b1e4e79547287f45002c8ccb073c66e}{00034}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_choice_a2b1e4e79547287f45002c8ccb073c66e}{respond}}(\textcolor{keywordtype}{char} c)}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00035}00035     \{}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00036}00036         response = c;}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00037}00037         }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00038}00038         \textcolor{comment}{//Use choice input to determine what to output}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00039}00039         \textcolor{keywordflow}{if}(response == \textcolor{charliteral}{'Y'} || response == \textcolor{charliteral}{'y'})}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00040}00040         \{}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00041}00041             cout << endl << \textcolor{stringliteral}{"{}    Name for Player: Mary Sue"{}} << endl << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00042}00042                  << \textcolor{stringliteral}{"{}   Ship Coordinates -\/"{}} << endl << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00043}00043                  << \textcolor{stringliteral}{"{}    Carrier: A5 A9"{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00044}00044                  << \textcolor{stringliteral}{"{} Battleship: F2 I2"{}} << endl        }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00045}00045                  << \textcolor{stringliteral}{"{}    Cruiser: E5 G5"{}} << endl           }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00046}00046                  << \textcolor{stringliteral}{"{}  Submarine: I8 I10"{}} << endl               }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00047}00047                  << \textcolor{stringliteral}{"{}  Destroyer: C2 D2"{}} << endl << endl            }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00048}00048                  << \textcolor{stringliteral}{"{}      -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Player Board -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00049}00049                  << \textcolor{stringliteral}{"{}        1   2   3   4   5   6   7   8   9   10"{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00050}00050                  << \textcolor{stringliteral}{"{}        \_   \_   \_   \_   \_   \_   \_   \_   \_   \_ "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00051}00051                  << \textcolor{stringliteral}{"{}   A  | 0 | 0 | 0 | 0 | X | X | X | X | X | 0 | "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00052}00052                  << \textcolor{stringliteral}{"{}   B  | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00053}00053                  << \textcolor{stringliteral}{"{}   C  | 0 | X | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl  }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00054}00054                  << \textcolor{stringliteral}{"{}   D  | 0 | X | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00055}00055                  << \textcolor{stringliteral}{"{}   E  | 0 | 0 | 0 | 0 | X | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00056}00056                  << \textcolor{stringliteral}{"{}   F  | 0 | X | 0 | 0 | X | 0 | 0 | 0 | 0 | 0 | "{}} << endl                     }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00057}00057                  << \textcolor{stringliteral}{"{}   G  | 0 | X | 0 | 0 | X | 0 | 0 | 0 | 0 | 0 | "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00058}00058                  << \textcolor{stringliteral}{"{}   H  | 0 | X | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00059}00059                  << \textcolor{stringliteral}{"{}   I  | 0 | X | 0 | 0 | 0 | 0 | 0 | X | X | X | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00060}00060                  << \textcolor{stringliteral}{"{}   J  | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00061}00061                  << endl;}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00062}00062         \}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00063}00063     \}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00064}00064       }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00065}00065     \textcolor{comment}{//Choice function used to output requested output}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00066}\mbox{\hyperlink{class_choice_ae74583b200895c539ec0f02e72861ab0}{00066}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_choice_ae74583b200895c539ec0f02e72861ab0}{respond}}(\textcolor{keywordtype}{string} c)}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00067}00067     \{}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00068}00068         response = c;}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00069}00069           }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00070}00070         \textcolor{comment}{//Use choice input to determine what to output}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00071}00071         \textcolor{keywordflow}{if}(response == \textcolor{stringliteral}{"{}Y"{}} || response == \textcolor{stringliteral}{"{}Y"{}})}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00072}00072         \{}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00073}00073             cout << endl << \textcolor{stringliteral}{"{}    Name for Player: Mary Sue"{}} << endl << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00074}00074                  << \textcolor{stringliteral}{"{}   Ship Coordinates -\/"{}} << endl << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00075}00075                  << \textcolor{stringliteral}{"{}    Carrier: A5 A9"{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00076}00076                  << \textcolor{stringliteral}{"{} Battleship: F2 I2"{}} << endl        }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00077}00077                  << \textcolor{stringliteral}{"{}    Cruiser: E5 G5"{}} << endl           }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00078}00078                  << \textcolor{stringliteral}{"{}  Submarine: I8 I10"{}} << endl               }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00079}00079                  << \textcolor{stringliteral}{"{}  Destroyer: C2 D2"{}} << endl << endl            }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00080}00080                  << \textcolor{stringliteral}{"{}      -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Player Board -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00081}00081                  << \textcolor{stringliteral}{"{}        1   2   3   4   5   6   7   8   9   10"{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00082}00082                  << \textcolor{stringliteral}{"{}        \_   \_   \_   \_   \_   \_   \_   \_   \_   \_ "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00083}00083                  << \textcolor{stringliteral}{"{}   A  | 0 | 0 | 0 | 0 | X | X | X | X | X | 0 | "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00084}00084                  << \textcolor{stringliteral}{"{}   B  | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00085}00085                  << \textcolor{stringliteral}{"{}   C  | 0 | X | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl  }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00086}00086                  << \textcolor{stringliteral}{"{}   D  | 0 | X | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00087}00087                  << \textcolor{stringliteral}{"{}   E  | 0 | 0 | 0 | 0 | X | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00088}00088                  << \textcolor{stringliteral}{"{}   F  | 0 | X | 0 | 0 | X | 0 | 0 | 0 | 0 | 0 | "{}} << endl                     }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00089}00089                  << \textcolor{stringliteral}{"{}   G  | 0 | X | 0 | 0 | X | 0 | 0 | 0 | 0 | 0 | "{}} << endl}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00090}00090                  << \textcolor{stringliteral}{"{}   H  | 0 | X | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00091}00091                  << \textcolor{stringliteral}{"{}   I  | 0 | X | 0 | 0 | 0 | 0 | 0 | X | X | X | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00092}00092                  << \textcolor{stringliteral}{"{}   J  | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | "{}} << endl }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00093}00093                  << endl;}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00094}00094         \}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00095}00095     \} }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00096}00096     }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00097}00097     \textcolor{comment}{//Friendly overloaded << operator function}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00098}00098     \textcolor{keyword}{friend} ostream\& \mbox{\hyperlink{class_choice_aa0621082e990adfd643a51fc499c14ea}{operator<<}}(ostream\& os, \mbox{\hyperlink{class_choice}{Choice<char>}} \&same);}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00099}00099 \};}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00101}00101 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CHOICE\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_choice_8h_source_l00102}00102 }
+
+\end{DoxyCode}
